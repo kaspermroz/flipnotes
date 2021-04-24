@@ -1,5 +1,4 @@
 # flipnotes
-## What is it?
 flipnotes is a simple application to improve your learning experiene 🤓
 
 ## Tech Stack
@@ -7,7 +6,6 @@ flipnotes is a simple application to improve your learning experiene 🤓
  - [TailwindCSS](https://tailwindcss.com/)
  - [Airtable](https://airtable.com/)
  ## Development
- ---
  Feel free to work this repository and create your own flipnotes!
  ### Prerequisites
  You need to create Airtables account - they offer a free plan!
