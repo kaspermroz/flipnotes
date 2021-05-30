@@ -43,6 +43,8 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': ['off'],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         '@typescript-eslint/indent': ['error', 2],
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/semi': ['error'],
       },
     },
   ],
