@@ -8,7 +8,6 @@ module.exports = {
   ignorePatterns: ['node_modules/*', '.next/*', '.out/*', '!.prettierrc.js'], // We don't want to lint generated files nor node_modules, but we want to lint .prettierrc.js (ignored by default by eslint)
   extends: ['eslint:recommended'],
   overrides: [
-    // This configuration will apply only to TypeScript files
     {
       files: ['**/*.ts', '**/*.tsx'],
       parser: '@typescript-eslint/parser',
@@ -27,19 +26,12 @@ module.exports = {
         'plugin:prettier/recommended', // Prettier plugin for ESlint
       ],
       rules: {
-        // We will use TypeScript's types for component props instead
+        'max-len': [2, { code: 120 }],
         'react/prop-types': 'off',
-
-        // No need to import React when using Next.js
         'react/react-in-jsx-scope': 'off',
-
         // This rule is not compatible with Next.js's <Link /> components
         'jsx-a11y/anchor-is-valid': 'off',
-
-        // Why would you want unused vars?
         '@typescript-eslint/no-unused-vars': ['error'],
-
-        // I suggest this setting for requiring return types on functions only where useful
         '@typescript-eslint/explicit-function-return-type': ['off'],
         'prettier/prettier': ['error', {}, { usePrettierrc: true }],
         '@typescript-eslint/indent': ['error', 2],
