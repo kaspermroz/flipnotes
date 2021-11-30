@@ -4,7 +4,6 @@ flipnotes is a simple application to improve your learning experiene 🤓
 ## Tech Stack
  - [NextJS](https://nextjs.org/)
  - [Chakra UI](https://chakra-ui.com/)
- - [Airtable](https://airtable.com/)
  ## Development
  Feel free to work this repository and create your own flipnotes!
  ### Prerequisites

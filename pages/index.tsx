@@ -1,16 +1,9 @@
-import Head from 'next/head';
-import App from '@components/App';
+import type { NextPage } from 'next'
 
-export { getServerSideProps } from '@components/Chakra';
-
-export default function Home() {
+const Home: NextPage = () => {
   return (
-    <div>
-      <Head>
-        <title>flipnotes</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <App />
-    </div>
-  );
+    <div>Hello next.js!</div>
+  )
 }
+
+export default Home
