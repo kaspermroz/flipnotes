@@ -40,3 +40,6 @@ yarn-error.log*
 # sqlite
 *.db
 *.db-journal
+
+# lint-staged
+.eslintcache
