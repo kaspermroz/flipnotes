@@ -1,0 +1,38 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  username     String   @unique
+  passwordHash String
+  groups       Group[]
+}
+
+model Group {
+  id       String @id @default(uuid())
+  userId   String
+  name     String
+  User     User @relation(fields: [userId], references: [id])
+  Flipnote Flipnote[]
+}
+
+model Flipnote {
+  id        String   @id @default(uuid())
+  groupId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  title     String
+  content   String
+  Group     Group  @relation(fields: [groupId], references: [id])
+}
