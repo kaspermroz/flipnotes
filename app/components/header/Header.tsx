@@ -5,12 +5,15 @@ import {
   Text,
   Flex,
 } from '@chakra-ui/react';
+import { Link } from '@remix-run/react';
 
 export const Header = ({children}: PropsWithChildren<any>) => {
   return (
     <Box p={6} pl={12} pr={12}>
       <HStack w="full" align="baseline">
-        <Text fontSize="2xl">flipnotes</Text>
+        <Link to="/">
+          <Text fontSize="2xl">flipnotes</Text>
+        </Link>
         <Flex justify="end" w="full" align="center">
           {children}
         </Flex>

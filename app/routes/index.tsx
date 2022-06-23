@@ -1,6 +1,25 @@
 import { Text, Button,  Flex, Box, Center } from '@chakra-ui/react';
-import { NavLink} from '@remix-run/react'
+import { NavLink } from '@remix-run/react'
+import { MetaFunction, LoaderFunction, redirect } from '@remix-run/node'
+
 import { Header } from '~/components/header'
+import { getUserId } from '~/utils/session.server'
+
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const userId = await getUserId(request)
+  if (userId) {
+    return redirect('/app')
+  }
+
+  return null
+}
+
+export const meta: MetaFunction = () => {
+  return {
+    title: "Get to know! | Flipnotes"
+  }
+}
 
 export default function Index() {
   return (
