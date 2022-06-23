@@ -111,3 +111,14 @@ export async function createUserSession(
     },
   });
 }
+
+export async function register({
+  username,
+  password,
+}: LoginForm) {
+  const passwordHash = await bcrypt.hash(password, 10);
+  const user = await db.user.create({
+    data: { username, passwordHash },
+  });
+  return { id: user.id, username };
+}
