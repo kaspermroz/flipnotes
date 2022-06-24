@@ -1,5 +1,5 @@
 import { LoaderFunction, json } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import { useLoaderData, Outlet } from '@remix-run/react'
 import { Button } from '@chakra-ui/react'
 
 import { Header } from '~/components/header'
@@ -10,14 +10,12 @@ type LoaderData = {
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await requireUserId(request)
+  const _ = await requireUserId(request)
 
-  return json({ userId })
+  return null
 }
 
 export default function App() {
-  const data = useLoaderData<LoaderData>()
-
   return (
     <div>
       <Header>
@@ -25,7 +23,7 @@ export default function App() {
           <Button type="submit" colorScheme="teal">Log out</Button>
         </form>
       </Header>
-      {data.userId}
+      <Outlet />
     </div>
   )
 }
