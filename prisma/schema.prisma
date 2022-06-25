@@ -23,7 +23,7 @@ model Group {
   id       String @id @default(uuid())
   userId   String
   name     String
-  User     User @relation(fields: [userId], references: [id])
+  User     User @relation(fields: [userId], references: [id], onDelete: Cascade)
   Flipnote Flipnote[]
 }
 
@@ -34,5 +34,5 @@ model Flipnote {
   updatedAt DateTime @updatedAt
   title     String
   content   String
-  Group     Group  @relation(fields: [groupId], references: [id])
+  Group     Group  @relation(fields: [groupId], references: [id], onDelete: Cascade)
 }

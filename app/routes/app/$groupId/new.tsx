@@ -44,7 +44,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function New() {
   return (
-    <Box minW={500}>
+    <Box minW={500} maxW={500}>
       <Text fontSize="xl" mb={6}>
         <b>Create a new flipnote</b>
       </Text>

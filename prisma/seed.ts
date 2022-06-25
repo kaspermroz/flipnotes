@@ -17,7 +17,7 @@ async function seed() {
 
   const group = await db.group.create({
     data: {
-      name: "Test Group",
+      name: "React ⚛️",
       userId: user.id,
     },
   });
@@ -44,6 +44,14 @@ const getFlipnotes = () => [
   },
   {
     title: "useEffect",
-    content: "React foor for using async side effects",
+    content: "React hook for using async side effects",
+  },
+  {
+    title: "useMemo",
+    content: "React hook for memoising a value, e.g. heavy computation result",
+  },
+  {
+    title: "useContext",
+    content: "React hook for retrieving React.Context values",
   },
 ];

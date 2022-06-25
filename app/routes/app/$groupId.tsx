@@ -18,6 +18,7 @@ export const links: LinksFunction = () => {
 
 type LoaderData = {
   name?: string;
+  groupId?: string;
   flipnotes?: Pick<Flipnote, "id" | "title">[];
 };
 
@@ -32,7 +33,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
   const flipnotes = await db.flipnote.findMany({
     where: { groupId },
-    take: 5,
     select: {
       id: true,
       title: true,
@@ -42,7 +42,7 @@ export const loader: LoaderFunction = async ({ params }) => {
     },
   });
 
-  return json({ name, flipnotes });
+  return json({ name, flipnotes, groupId });
 };
 
 export default function GroupId() {
@@ -70,6 +70,9 @@ export default function GroupId() {
             </li>
           ))}
         </ul>
+        <form action={`${data?.groupId}/delete`} method="post">
+          <Button colorScheme="red" mt={4} type="submit" size="xs">Delete group</Button>
+        </form>
       </Box>
       <Box w="full">
         <Outlet />

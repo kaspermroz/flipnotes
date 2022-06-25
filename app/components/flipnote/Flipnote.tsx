@@ -13,8 +13,8 @@ export const Flipnote = ({ title, content }: FlipnoteProps) => {
     <Box
       className="flip-card"
       onClick={() => setIsFlipped(!isFlipped)}
-      w={800}
-      h={800}
+      w={700}
+      h={700}
       borderRadius={25}
     >
       <Box
@@ -31,7 +31,9 @@ export const Flipnote = ({ title, content }: FlipnoteProps) => {
           p={4}
         >
           <Center h="full">
-            <Text fontSize="4xl"><b>{title}</b></Text>
+            <Text fontSize="4xl">
+              <b>{title}</b>
+            </Text>
           </Center>
         </Box>
         <Box

@@ -1,10 +1,10 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
-import { Text, Center } from "@chakra-ui/react";
+import { useLoaderData, Link } from "@remix-run/react";
+import { Text, Center, Box } from "@chakra-ui/react";
 import type { Flipnote } from "@prisma/client";
 
-import { Flipnote as FlipnoteComponent } from '~/components/flipnote'
+import { Flipnote as FlipnoteComponent } from "~/components/flipnote";
 import { db } from "~/utils/db.server";
 
 type LoaderData = {
@@ -30,10 +30,24 @@ export default function GroupIdIndex() {
   const content = data?.flipnote?.content ?? "";
 
   return (
-    <Center w="full" pt={24}>
-      {title && content ? (
-        <FlipnoteComponent title={title} content={content} />
-      ) : null}
-    </Center>
+    <Box w="full">
+        {title && content ? (
+          <Center pt={24}>
+            <Box>
+              <FlipnoteComponent title={title} content={content} />
+              <Text fontSize="2xl" mt={40}>👈 This is a random flipnote.</Text>
+              <Text fontSize="2xl">👈 Use menu on the left to manage your flipnotes in this group!</Text>
+              <Link to=".">
+                <Text fontSize="2xl">👈 Click me to get another random flipnote 😵‍💫</Text>
+              </Link>
+            </Box>
+          </Center>
+        ) : (
+          <Box>
+            <Text fontSize="2xl">👈 Nothing in here 💨</Text>
+            <Text fontSize="2xl">👈 Use menu on the left to add your first flipnote!</Text>
+          </Box>
+        )}
+    </Box>
   );
 }
