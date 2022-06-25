@@ -77,7 +77,12 @@ export default function Login() {
       <Header />
       <Box mt="120px">
         <Center>
-          <Box w="500px" p="50px" border="1px solid #CBD5E0" borderRadius={10}>
+          <Box
+            w="500px"
+            p="50px"
+            border={{ base: "none", lg: "1px solid #CBD5E0" }}
+            borderRadius={10}
+          >
             <Text fontSize="2xl" mb={8}>
               <b>Sign up</b>
             </Text>

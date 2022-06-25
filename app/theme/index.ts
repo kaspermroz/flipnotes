@@ -6,6 +6,8 @@ export const theme: Partial<Theme> = extendTheme({
     global: {
       "html, body": {
         background: "#e5e5e5",
+        height: "100vh",
+        width: "100%",
       },
     },
   },
