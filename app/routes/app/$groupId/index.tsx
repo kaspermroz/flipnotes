@@ -15,6 +15,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const count = await db.flipnote.count({ where: { groupId } });
   const randomRowNumber = Math.floor(Math.random() * count);
   const [flipnote] = await db.flipnote.findMany({
+    where: { groupId },
     take: 1,
     skip: randomRowNumber,
   });
