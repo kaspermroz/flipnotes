@@ -70,7 +70,7 @@ export default function GroupId() {
             </li>
           ))}
         </ul>
-        <form action={`${data?.groupId}/delete`} method="post">
+        <form action={`/app/${data?.groupId}/delete`} method="post">
           <Button colorScheme="red" mt={4} type="submit" size="xs">
             Delete group
           </Button>

@@ -35,7 +35,7 @@ export default function GroupIdIndex() {
         <Center pt={24}>
           <Box>
             <FlipnoteComponent title={title} content={content} />
-            <Text fontSize="2xl" mt={40}>
+            <Text fontSize="2xl" mt={28}>
               👈 This is a random flipnote.
             </Text>
             <Text fontSize="2xl">

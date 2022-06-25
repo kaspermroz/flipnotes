@@ -35,7 +35,7 @@ export default function GroupIdIndex() {
           <FlipnoteComponent title={title} content={content} />
           <Center>
             <form action={`${id}/delete`} method="post">
-              <Button colorScheme="red" mt={40} type="submit">
+              <Button colorScheme="red" mt={28} type="submit">
                 Delete flipnote
               </Button>
             </form>
