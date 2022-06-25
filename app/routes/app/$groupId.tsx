@@ -49,32 +49,47 @@ export default function GroupId() {
   const data = useLoaderData<LoaderData>();
 
   return (
-    <Flex p={6} pl={12} pr={12}>
+    <Flex
+      p={6}
+      pl={12}
+      pr={12}
+      direction={{ base: "column-reverse", lg: "row" }}
+    >
       <Box w={320}>
-        <Text fontSize="xl" mb={4}>
-          <b>{data?.name}</b>
-        </Text>
-        <Link to="./new">
-          <Button variant="link" color="grey.800" mb={4}>
-            Add flipnote
-          </Button>
-        </Link>
-        <ul style={{ paddingLeft: 24 }}>
-          {data?.flipnotes?.map(({ id, title }) => (
-            <li key={id}>
-              <Link to={`./${id}`}>
-                <Button variant="link" color="gray.800">
-                  {title}
-                </Button>
-              </Link>
-            </li>
-          ))}
-        </ul>
-        <form action={`/app/${data?.groupId}/delete`} method="post">
-          <Button colorScheme="red" mt={4} type="submit" size="xs">
-            Delete group
-          </Button>
-        </form>
+        <Flex
+          direction="column"
+          align={{ base: "center", lg: "start" }}
+          mt={{ base: 4, lg: 0 }}
+        >
+          <Text fontSize="xl" mb={4}>
+            <b>{data?.name}</b>
+          </Text>
+          <Link to="./new">
+            <Button variant="link" color="grey.800" mb={4}>
+              Add flipnote
+            </Button>
+          </Link>
+          <ul style={{ paddingLeft: 24 }}>
+            {data?.flipnotes?.map(({ id, title }) => (
+              <li key={id}>
+                <Link to={`./${id}`}>
+                  <Button
+                    variant="link"
+                    color="gray.800"
+                    w={{ base: "full", lg: "auto" }}
+                  >
+                    {title}
+                  </Button>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <form action={`/app/${data?.groupId}/delete`} method="post">
+            <Button colorScheme="red" mt={4} type="submit" size="xs">
+              Delete group
+            </Button>
+          </form>
+        </Flex>
       </Box>
       <Box w="full">
         <Outlet />

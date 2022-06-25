@@ -45,7 +45,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 
 export default function New() {
   return (
-    <Box minW={500} maxW={500}>
+    <Box minW={{ base: 0, lg: 500 }} maxW={500}>
       <Text fontSize="xl" mb={6}>
         <b>Create a new flipnote</b>
       </Text>
@@ -67,7 +67,11 @@ export default function New() {
           rows={5}
           name="content"
         />
-        <Button type="submit" colorScheme="teal">
+        <Button
+          type="submit"
+          colorScheme="teal"
+          w={{ base: "full", lg: "auto" }}
+        >
           Create
         </Button>
       </form>

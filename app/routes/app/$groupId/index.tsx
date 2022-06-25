@@ -1,7 +1,7 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, Link } from "@remix-run/react";
-import { Text, Center, Box } from "@chakra-ui/react";
+import { Text, Center, Box, Show, Button } from "@chakra-ui/react";
 import type { Flipnote } from "@prisma/client";
 
 import { Flipnote as FlipnoteComponent } from "~/components/flipnote";
@@ -32,28 +32,50 @@ export default function GroupIdIndex() {
   return (
     <Box w="full">
       {title && content ? (
-        <Center pt={24}>
+        <Center pt={{ base: 8, lg: 24 }}>
           <Box>
             <FlipnoteComponent title={title} content={content} />
-            <Text fontSize="2xl" mt={28}>
-              👈 This is a random flipnote.
-            </Text>
-            <Text fontSize="2xl">
-              👈 Use menu on the left to manage your flipnotes in this group!
-            </Text>
-            <Link to=".">
+            <Show above="lg">
+              <Link to=".">
+                <Button variant="link" fontSize="2xl" mt={28} color="gray.800">
+                  Random flipnote 😵‍💫
+                </Button>
+              </Link>
+              <Text fontSize="2xl">👈 This is a random flipnote.</Text>
               <Text fontSize="2xl">
-                👈 Click me to get another random flipnote 😵‍💫
+                👈 Use menu on the left to manage your flipnotes in this group!
               </Text>
-            </Link>
+            </Show>
+            <Show below="lg">
+              <Center>
+                <Link to=".">
+                  <Button variant="link" fontSize="lg" mt={8} color="gray.800">
+                    Random flipnote 😵‍💫
+                  </Button>
+                </Link>
+              </Center>
+              <Text fontSize="lg">👇 This is a random flipnote.</Text>
+              <Text fontSize="lg">
+                👇 Use menu on the bottom to manage your flipnotes in this
+                group!
+              </Text>
+            </Show>
           </Box>
         </Center>
       ) : (
         <Box>
-          <Text fontSize="2xl">👈 Nothing in here 💨</Text>
-          <Text fontSize="2xl">
-            👈 Use menu on the left to add your first flipnote!
-          </Text>
+          <Show above="lg">
+            <Text fontSize="2xl">👈 Nothing in here 💨</Text>
+            <Text fontSize="2xl">
+              👈 Use menu on the left to add your first flipnote!
+            </Text>
+          </Show>
+          <Show below="lg">
+            <Text fontSize="lg">👇 Nothing in here 💨</Text>
+            <Text fontSize="lg">
+              👇 Use menu on the bottom to add your first flipnote!
+            </Text>
+          </Show>
         </Box>
       )}
     </Box>
