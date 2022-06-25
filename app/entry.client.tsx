@@ -1,32 +1,32 @@
-import React, { useState } from 'react'
-import { hydrate } from 'react-dom'
-import { CacheProvider } from '@emotion/react'
-import { RemixBrowser } from '@remix-run/react'
+import React, { useState } from "react";
+import { hydrate } from "react-dom";
+import { CacheProvider } from "@emotion/react";
+import { RemixBrowser } from "@remix-run/react";
 
-import { ClientStyleContext } from '~/context/chakra'
-import { createEmotionCache } from '~/utils/cache'
+import { ClientStyleContext } from "~/context/chakra";
+import { createEmotionCache } from "~/utils/cache";
 
 interface ClientCacheProviderProps {
   children: React.ReactNode;
 }
 
 function ClientCacheProvider({ children }: ClientCacheProviderProps) {
-  const [cache, setCache] = useState(createEmotionCache())
+  const [cache, setCache] = useState(createEmotionCache());
 
   function reset() {
-    setCache(createEmotionCache())
+    setCache(createEmotionCache());
   }
 
   return (
     <ClientStyleContext.Provider value={{ reset }}>
       <CacheProvider value={cache}>{children}</CacheProvider>
     </ClientStyleContext.Provider>
-  )
+  );
 }
 
 hydrate(
   <ClientCacheProvider>
     <RemixBrowser />
   </ClientCacheProvider>,
-  document,
-)
+  document
+);

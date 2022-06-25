@@ -1,32 +1,34 @@
-import { Text, Button,  Flex, Box, Center } from '@chakra-ui/react';
-import { NavLink } from '@remix-run/react'
-import { MetaFunction, LoaderFunction, redirect } from '@remix-run/node'
+import { Text, Button, Flex, Box, Center } from "@chakra-ui/react";
+import { NavLink } from "@remix-run/react";
+import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
-import { Header } from '~/components/header'
-import { getUserId } from '~/utils/session.server'
-
+import { Header } from "~/components/header";
+import { getUserId } from "~/utils/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const userId = await getUserId(request)
+  const userId = await getUserId(request);
   if (userId) {
-    return redirect('/app')
+    return redirect("/app");
   }
 
-  return null
-}
+  return null;
+};
 
 export const meta: MetaFunction = () => {
   return {
-    title: "Get to know! | Flipnotes"
-  }
-}
+    title: "Get to know! | Flipnotes",
+  };
+};
 
 export default function Index() {
   return (
     <div>
       <Header>
         <NavLink to="/login">
-          <Button variant="link" color="gray.800" mr={4}>Log in</Button>
+          <Button variant="link" color="gray.800" mr={4}>
+            Log in
+          </Button>
         </NavLink>
         <NavLink to="/register">
           <Button colorScheme="teal">Sign up</Button>
@@ -45,15 +47,45 @@ export default function Index() {
           </Text>
         </Box>
         <Box w="full" position="relative">
-          <Box position="absolute" left="20px" top={0} bg="#FFFFF0" w={500} h={500} border="1px solid #F6E05E" borderRadius={25} zIndex={2}>
+          <Box
+            position="absolute"
+            left="20px"
+            top={0}
+            bg="#FFFFF0"
+            w={500}
+            h={500}
+            border="1px solid #F6E05E"
+            borderRadius={25}
+            zIndex={2}
+          >
             <Center h="full">
               <Text fontSize="4xl">
                 <b>React.useEffect()</b>
               </Text>
             </Center>
           </Box>
-          <Box position="absolute" left="40px" top="20px" bg="#F0FFF4" w={500} h={500} border="1px solid #68D391" borderRadius={25} zIndex={1} />
-          <Box position="absolute" left="60px" top="40px" bg="#E6FFFA" w={500} h={500} border="1px solid #4FD1C5" borderRadius={25} zIndex={0} />
+          <Box
+            position="absolute"
+            left="40px"
+            top="20px"
+            bg="#F0FFF4"
+            w={500}
+            h={500}
+            border="1px solid #68D391"
+            borderRadius={25}
+            zIndex={1}
+          />
+          <Box
+            position="absolute"
+            left="60px"
+            top="40px"
+            bg="#E6FFFA"
+            w={500}
+            h={500}
+            border="1px solid #4FD1C5"
+            borderRadius={25}
+            zIndex={0}
+          />
         </Box>
       </Flex>
     </div>

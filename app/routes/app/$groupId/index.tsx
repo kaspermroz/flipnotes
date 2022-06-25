@@ -1,17 +1,18 @@
-import { LoaderFunction, json } from '@remix-run/node';
-import { useLoaderData } from '@remix-run/react';
-import { Text } from '@chakra-ui/react';
-import { Flipnote } from '@prisma/client';
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { Text } from "@chakra-ui/react";
+import type { Flipnote } from "@prisma/client";
 
-import { db } from '~/utils/db.server'
+import { db } from "~/utils/db.server";
 
 type LoaderData = {
-  flipnote?: Flipnote
-}
+  flipnote?: Flipnote;
+};
 
 export const loader: LoaderFunction = async ({ params }) => {
   const { groupId } = params;
-  const count = await db.flipnote.count({ where: { groupId }});
+  const count = await db.flipnote.count({ where: { groupId } });
   const randomRowNumber = Math.floor(Math.random() * count);
   const [flipnote] = await db.flipnote.findMany({
     take: 1,
@@ -19,7 +20,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   });
 
   return json({ flipnote });
-}
+};
 
 export default function GroupIdIndex() {
   const data = useLoaderData<LoaderData>();
@@ -27,5 +28,5 @@ export default function GroupIdIndex() {
     <div>
       <Text>{data?.flipnote?.title}</Text>
     </div>
-  )
+  );
 }

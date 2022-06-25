@@ -1,14 +1,15 @@
-import { LoaderFunction, ActionFunction, json, redirect } from '@remix-run/node';
-import { useLoaderData, Link } from '@remix-run/react';
-import { Group } from '@prisma/client';
-import { Flex, Box, Center, Input, Button } from '@chakra-ui/react';
+import type { LoaderFunction } from "@remix-run/node";
+import { json } from "@remix-run/node";
+import { useLoaderData, Link } from "@remix-run/react";
+import type { Group } from "@prisma/client";
+import { Flex, Box, Center, Input, Button } from "@chakra-ui/react";
 
-import { requireUserId } from '~/utils/session.server';
-import { db } from '~/utils/db.server';
+import { requireUserId } from "~/utils/session.server";
+import { db } from "~/utils/db.server";
 
 type LoaderData = {
-  groups: Pick<Group, 'id'|'name'>[]
-}
+  groups: Pick<Group, "id" | "name">[];
+};
 
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
@@ -17,20 +18,26 @@ export const loader: LoaderFunction = async ({ request }) => {
     select: {
       id: true,
       name: true,
-    }
-  })
+    },
+  });
 
-  return json({ groups })
-}
+  return json({ groups });
+};
 
 export default function AppIndex() {
-  const data = useLoaderData<LoaderData>()
+  const data = useLoaderData<LoaderData>();
 
   return (
     <Flex p={12}>
       {data?.groups.map(({ id, name }) => (
         <Link key={id} to={`/app/${id}`}>
-          <Box w={240} h={240} borderRadius={25} border="1px solid grey" mr={10}>
+          <Box
+            w={240}
+            h={240}
+            borderRadius={25}
+            border="1px solid grey"
+            mr={10}
+          >
             <Center h="full">{name}</Center>
           </Box>
         </Link>
@@ -47,11 +54,13 @@ export default function AppIndex() {
                 name="name"
                 placeholder="Group name"
               />
-              <Button variant="link" color="grey.800" type="submit" w="full">Create new</Button>
+              <Button variant="link" color="grey.800" type="submit" w="full">
+                Create new
+              </Button>
             </Box>
           </Center>
         </Box>
       </form>
     </Flex>
-  )
+  );
 }

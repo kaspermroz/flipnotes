@@ -1,20 +1,17 @@
-import { LoaderFunction, ActionFunction, redirect, json } from '@remix-run/node'
-import { useLoaderData, Outlet } from '@remix-run/react'
-import { Button } from '@chakra-ui/react'
+import type { LoaderFunction, ActionFunction } from "@remix-run/node";
+import { redirect, json } from "@remix-run/node";
+import { Outlet } from "@remix-run/react";
+import { Button } from "@chakra-ui/react";
 
-import { Header } from '~/components/header'
-import { requireUserId } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
-
-type LoaderData = {
-  userId: string
-}
+import { Header } from "~/components/header";
+import { requireUserId } from "~/utils/session.server";
+import { db } from "~/utils/db.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const _ = await requireUserId(request)
+  const _id = await requireUserId(request);
 
-  return null
-}
+  return null;
+};
 
 type ActionData = {
   formError?: string;
@@ -26,39 +23,38 @@ type ActionData = {
   };
 };
 
-const badRequest = (data: ActionData) =>
-  json(data, { status: 400 });
+const badRequest = (data: ActionData) => json(data, { status: 400 });
 
 export const action: ActionFunction = async ({ request }) => {
-  console.log(request)
+  console.log(request);
   const userId = await requireUserId(request);
-  const form = await request.formData()
-  const name = await form.get('name')
+  const form = await request.formData();
+  const name = await form.get("name");
 
-  if (
-    typeof name !== 'string'
-  ) {
-    return badRequest({ formError: "Form submitted incorrectly." })
+  if (typeof name !== "string") {
+    return badRequest({ formError: "Form submitted incorrectly." });
   }
   const fields = { name };
-  const group = await db.group.create({ data: { userId, name } })
-  console.log(group)
+  const group = await db.group.create({ data: { userId, name } });
+  console.log(group);
   if (!group) {
-    return badRequest({ fields, formError: "Failed to create user" })
+    return badRequest({ fields, formError: "Failed to create user" });
   }
 
-  return redirect(`/app/${group.id}`)
-}
+  return redirect(`/app/${group.id}`);
+};
 
 export default function App() {
   return (
     <div>
       <Header>
         <form action="/logout" method="post">
-          <Button type="submit" colorScheme="teal">Log out</Button>
+          <Button type="submit" colorScheme="teal">
+            Log out
+          </Button>
         </form>
       </Header>
       <Outlet />
     </div>
-  )
+  );
 }
