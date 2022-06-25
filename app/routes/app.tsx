@@ -1,16 +1,26 @@
 import type { LoaderFunction, ActionFunction } from "@remix-run/node";
 import { redirect, json } from "@remix-run/node";
-import { Outlet } from "@remix-run/react";
-import { Button } from "@chakra-ui/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
+import { Button, Text } from "@chakra-ui/react";
 
 import { Header } from "~/components/header";
 import { requireUserId } from "~/utils/session.server";
 import { db } from "~/utils/db.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const _id = await requireUserId(request);
+type LoaderData = {
+  username?: string;
+};
 
-  return null;
+export const loader: LoaderFunction = async ({ request }) => {
+  const id = await requireUserId(request);
+  const user = await db.user.findUnique({ where: { id } });
+  if (!user) {
+    return json(null, { status: 500 });
+  }
+
+  const { username } = user;
+
+  return json({ username });
 };
 
 type ActionData = {
@@ -45,9 +55,11 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function App() {
+  const data = useLoaderData<LoaderData>();
   return (
     <div>
       <Header>
+        {data?.username ? <Text mr={4}>Hi, {data.username}!</Text> : null}
         <form action="/logout" method="post">
           <Button type="submit" colorScheme="teal">
             Log out

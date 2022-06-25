@@ -1,10 +1,20 @@
-import type { LoaderFunction } from "@remix-run/node";
+import type { LoaderFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, Outlet, Link } from "@remix-run/react";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { Flipnote } from "@prisma/client";
 
 import { db } from "~/utils/db.server";
+import flipnoteStylesHref from "~/components/flipnote/flipnote.css";
+
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: flipnoteStylesHref,
+    },
+  ];
+};
 
 type LoaderData = {
   name?: string;
@@ -61,7 +71,7 @@ export default function GroupId() {
           ))}
         </ul>
       </Box>
-      <Box>
+      <Box w="full">
         <Outlet />
       </Box>
     </Flex>

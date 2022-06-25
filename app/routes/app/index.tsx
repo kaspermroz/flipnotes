@@ -35,8 +35,9 @@ export default function AppIndex() {
             w={240}
             h={240}
             borderRadius={25}
-            border="1px solid grey"
             mr={10}
+            bg="#FFFFF0"
+            border="1px solid #F6E05E"
           >
             <Center h="full">{name}</Center>
           </Box>

@@ -1,9 +1,10 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
-import { Text } from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import type { Flipnote } from "@prisma/client";
 
+import { Flipnote as FlipnoteComponent } from "~/components/flipnote";
 import { db } from "~/utils/db.server";
 
 type LoaderData = {
@@ -23,9 +24,14 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function GroupIdIndex() {
   const data = useLoaderData<LoaderData>();
+  const title = data?.flipnote?.title ?? "";
+  const content = data?.flipnote?.content ?? "";
+
   return (
-    <div>
-      <Text>{data?.flipnote?.title}</Text>
-    </div>
+    <Center w="full" pt={24}>
+      {title && content ? (
+        <FlipnoteComponent title={title} content={content} />
+      ) : null}
+    </Center>
   );
 }
