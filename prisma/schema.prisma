@@ -28,7 +28,7 @@ model Group {
 }
 
 model Flipnote {
-  id        String   @id @default(uuid())
+  id        Int   @id @default(autoincrement())
   groupId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
