@@ -26,7 +26,7 @@ export default function GroupIdIndex() {
   const data = useLoaderData<LoaderData>();
   const title = data?.flipnote?.title ?? "";
   const content = data?.flipnote?.content ?? "";
-  const id = data?.flipnote?.id
+  const id = data?.flipnote?.id;
 
   return (
     <Center w="full" pt={24}>

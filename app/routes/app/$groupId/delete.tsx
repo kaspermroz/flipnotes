@@ -1,4 +1,5 @@
-import { ActionFunction, LoaderFunction, redirect } from "@remix-run/node";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import { redirect } from "@remix-run/node";
 
 import { db } from "~/utils/db.server";
 
@@ -12,6 +13,6 @@ export const action: ActionFunction = async ({ params }) => {
   return redirect("/app");
 };
 
-export const loader: LoaderFunction = async ({ params }) => {
+export const loader: LoaderFunction = async () => {
   return redirect("/app");
 };

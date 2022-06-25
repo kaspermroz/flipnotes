@@ -2,7 +2,7 @@ import type { LoaderFunction, LinksFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { useLoaderData, Outlet, Link } from "@remix-run/react";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
-import { Flipnote } from "@prisma/client";
+import type { Flipnote } from "@prisma/client";
 
 import { db } from "~/utils/db.server";
 import flipnoteStylesHref from "~/components/flipnote/flipnote.css";
@@ -71,7 +71,9 @@ export default function GroupId() {
           ))}
         </ul>
         <form action={`${data?.groupId}/delete`} method="post">
-          <Button colorScheme="red" mt={4} type="submit" size="xs">Delete group</Button>
+          <Button colorScheme="red" mt={4} type="submit" size="xs">
+            Delete group
+          </Button>
         </form>
       </Box>
       <Box w="full">

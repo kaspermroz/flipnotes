@@ -1,4 +1,5 @@
-import { ActionFunction, json, redirect } from "@remix-run/node";
+import type { ActionFunction } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { Input, Textarea, Button, Text, Box } from "@chakra-ui/react";
 
 import { db } from "~/utils/db.server";

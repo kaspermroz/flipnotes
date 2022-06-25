@@ -31,23 +31,31 @@ export default function GroupIdIndex() {
 
   return (
     <Box w="full">
-        {title && content ? (
-          <Center pt={24}>
-            <Box>
-              <FlipnoteComponent title={title} content={content} />
-              <Text fontSize="2xl" mt={40}>👈 This is a random flipnote.</Text>
-              <Text fontSize="2xl">👈 Use menu on the left to manage your flipnotes in this group!</Text>
-              <Link to=".">
-                <Text fontSize="2xl">👈 Click me to get another random flipnote 😵‍💫</Text>
-              </Link>
-            </Box>
-          </Center>
-        ) : (
+      {title && content ? (
+        <Center pt={24}>
           <Box>
-            <Text fontSize="2xl">👈 Nothing in here 💨</Text>
-            <Text fontSize="2xl">👈 Use menu on the left to add your first flipnote!</Text>
+            <FlipnoteComponent title={title} content={content} />
+            <Text fontSize="2xl" mt={40}>
+              👈 This is a random flipnote.
+            </Text>
+            <Text fontSize="2xl">
+              👈 Use menu on the left to manage your flipnotes in this group!
+            </Text>
+            <Link to=".">
+              <Text fontSize="2xl">
+                👈 Click me to get another random flipnote 😵‍💫
+              </Text>
+            </Link>
           </Box>
-        )}
+        </Center>
+      ) : (
+        <Box>
+          <Text fontSize="2xl">👈 Nothing in here 💨</Text>
+          <Text fontSize="2xl">
+            👈 Use menu on the left to add your first flipnote!
+          </Text>
+        </Box>
+      )}
     </Box>
   );
 }
