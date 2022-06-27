@@ -8,6 +8,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
+  useMatches,
 } from "@remix-run/react";
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
 
@@ -39,6 +41,8 @@ const Document = withEmotionCache(
   ({ children }: DocumentProps, emotionCache) => {
     const serverStyleData = useContext(ServerStyleContext);
     const clientStyleData = useContext(ClientStyleContext);
+    let location = useLocation();
+    let matches = useMatches();
 
     // Only executed on client
     useEffect(() => {
@@ -54,6 +58,46 @@ const Document = withEmotionCache(
       clientStyleData?.reset();
       // eslint-disable-next-line
     }, []);
+
+    let isMount = true;
+
+    React.useEffect(() => {
+      let mounted = isMount;
+      isMount = false; // eslint-ignore-line
+
+      if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller?.postMessage({
+            type: "REMIX_NAVIGATION",
+            isMount: mounted,
+            location,
+            matches,
+            manifest: window.__remixManifest,
+          });
+        } else {
+          let listener = async () => {
+            await navigator.serviceWorker.ready;
+            navigator.serviceWorker.controller?.postMessage({
+              type: "REMIX_NAVIGATION",
+              isMount: mounted,
+              location,
+              matches,
+              manifest: window.__remixManifest,
+            });
+          };
+          navigator.serviceWorker.addEventListener(
+            "controllerchange",
+            listener
+          );
+          return () => {
+            navigator.serviceWorker.removeEventListener(
+              "controllerchange",
+              listener
+            );
+          };
+        }
+      }
+    }, [location]);
 
     return (
       <html lang="en">
