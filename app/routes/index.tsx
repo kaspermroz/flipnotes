@@ -43,17 +43,17 @@ export default function Index() {
         direction={{ base: "column", lg: "row" }}
       >
         <Box w="full">
-          <Text fontSize={{ base: "4xl", lg: "6xl" }}>
+          <Text fontSize={{ base: "2xl", lg: "6xl" }}>
             <b>All you know in one place.</b>
           </Text>
-          <Text fontSize={{ base: "4xl", lg: "6xl" }}>
+          <Text fontSize={{ base: "2xl", lg: "6xl" }}>
             <b>Build your own knowledge base.</b>
           </Text>
-          <Text fontSize={{ base: "4xl", lg: "6xl" }}>
+          <Text fontSize={{ base: "2xl", lg: "6xl" }}>
             <b>Flip it untill you remember!</b>
           </Text>
         </Box>
-        <Box w="full" position="relative">
+        <Box w="full" position="relative" mt={{ base: 4, lg: 0 }}>
           <Box
             position="absolute"
             left={{ base: 0, lg: "20px" }}
