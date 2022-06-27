@@ -8,6 +8,8 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
+  useMatches,
 } from "@remix-run/react";
 import type { MetaFunction, LinksFunction } from "@remix-run/node";
 
@@ -38,7 +40,9 @@ interface DocumentProps {
 const Document = withEmotionCache(
   ({ children }: DocumentProps, emotionCache) => {
     const serverStyleData = useContext(ServerStyleContext);
-    const clientStyleData = useContext(ClientStyleContext);
+    const clientStyleData = useContext(ClientStyleContext); // Only executed on client useEffect(() => { // re-link sheet container emotionCache.sheet.container = document.head; // re-inject tags const tags = emotionCache.sheet.tags; emotionCache.sheet.flush(); tags.forEach((tag) => { (emotionCache.sheet as any)._insertTag(tag); }); // reset cache to reapply global styles clientStyleData?.reset(); // eslint-disable-next-line }, []);
+    let location = useLocation();
+    let matches = useMatches();
 
     // Only executed on client
     useEffect(() => {
@@ -54,6 +58,46 @@ const Document = withEmotionCache(
       clientStyleData?.reset();
       // eslint-disable-next-line
     }, []);
+
+    let isMount = true;
+
+    React.useEffect(() => {
+      let mounted = isMount;
+      isMount = false; // eslint-ignore-line
+
+      if ("serviceWorker" in navigator) {
+        if (navigator.serviceWorker.controller) {
+          navigator.serviceWorker.controller?.postMessage({
+            type: "REMIX_NAVIGATION",
+            isMount: mounted,
+            location,
+            matches,
+            manifest: window.__remixManifest,
+          });
+        } else {
+          let listener = async () => {
+            await navigator.serviceWorker.ready;
+            navigator.serviceWorker.controller?.postMessage({
+              type: "REMIX_NAVIGATION",
+              isMount: mounted,
+              location,
+              matches,
+              manifest: window.__remixManifest,
+            });
+          };
+          navigator.serviceWorker.addEventListener(
+            "controllerchange",
+            listener
+          );
+          return () => {
+            navigator.serviceWorker.removeEventListener(
+              "controllerchange",
+              listener
+            );
+          };
+        }
+      }
+    }, [location]);
 
     return (
       <html lang="en">
