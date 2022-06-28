@@ -21,10 +21,7 @@ async function createAndLogin(username: string) {
 
   const user = await createUser(username, "myreallystrongpassword");
 
-  const response = await createUserSession(
-    user.id,
-    "/",
-  );
+  const response = await createUserSession(user.id, "/");
 
   const cookieValue = response.headers.get("Set-Cookie");
   if (!cookieValue) {

@@ -19,7 +19,7 @@ describe("smoke tests", () => {
     cy.findByPlaceholderText(/password/i).type(loginForm.password);
     // cy.findByRole("button", { name: /sign up/i }).click();
 
-    cy.wait(1000)
+    cy.wait(1000);
     // cy.findByRole("button", { name: /logout/i }).click();
   });
 
